@@ -1,0 +1,2 @@
+naam = "Bob"
+print(naem)
