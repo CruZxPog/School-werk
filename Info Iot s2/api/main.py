@@ -1,28 +1,43 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
+from typing import Union
+
 
 app = FastAPI()
 
-taken = [
-    {"id": 1, "taak": "schoonmaken", "status":False},
-    {"id": 2, "taak": "koken", "status": False},
-    {"id": 3, "taak": "afwassen", "status": False}
-]
+id_counter = 1
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
+tasks = []
 
-@app.get("/taken")
+class Task(BaseModel):
+    id: int
+    task: str
+    status: Union[bool, None] = False
+
+@app.get("/tasks")
 def read_todo():
-    return  taken
+    return tasks
 
-@app.post("/taken")
-def create_todo(taak: str):
-    new_todo = {"taak": taak, "status": False}
-    taken.append(new_todo)
-    return new_todo
+@app.post("/tasks/{task}")
+def create_new_task(task_new: str, status: Union[bool, None]=False):
+    global id_counter 
+    new_task = Task(id=id_counter, task=task_new, status=status)
+    id_counter += 1
+    tasks.append(new_task)
+    return new_task
 
-@app.delete("/taken/:id")
-def delete_todo(id: int):
-    taken = [todo for todo in taken if todo["id"] != id]
-    return {"message": "Taak verwijderd"}
+@app.put("/completeTask/{task_id}")
+def update_task(task_id: int):
+    for task in tasks:
+        if task.id == task_id:
+            task.status = True
+            return task
+    return {"message": "Task not found"}
+
+@app.delete("/deleteTask/{task_id}")
+def delete_task(task_id: int):
+    for task in tasks:
+        if task.id == task_id:
+            tasks.remove(task)
+            return {"message": "Task deleted"}
+    return {"message": "Task not found"}
