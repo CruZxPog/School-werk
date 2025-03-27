@@ -1,8 +1,25 @@
-from fastapi import FastAPI
+#		     █████████                  █████                    
+#			 ███░░░░░███                ░░███                    
+#			░███    ░███  ████████    ███████  ████████   ██████ 
+#			░███████████ ░░███░░███  ███░░███ ░░███░░███ ███░░███
+#			░███░░░░░███  ░███ ░███ ░███ ░███  ░███ ░░░ ░███████ 
+#			░███    ░███  ░███ ░███ ░███ ░███  ░███     ░███░░░  
+#			█████   █████ ████ █████░░████████ █████    ░░██████ 
+#			░░░░░   ░░░░░ ░░░░ ░░░░░  ░░░░░░░░ ░░░░░      ░░░░░░ 
+
+# Vergeet de bronnen niet toe te voegen!
+# Bronnen:
+# chatgpt.com (27/03)
+# copilot.github.com (27/03)
+
+
+from fastapi import FastAPI #fastapi dev main.py
 from pydantic import BaseModel  
 # BaseModel is used to define a structured data model for sensors, ensuring validation and serialization. 
 # This approach is preferred over using plain dictionaries or manual validation because it provides built-in type checking, 
 # data validation, and automatic documentation in FastAPI.
+# https://fastapi.tiangolo.com/#example-upgrade (27/03)
+# https://docs.pydantic.dev/latest/api/base_model/ (27/03)
 
 app = FastAPI()
 
