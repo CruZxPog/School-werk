@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{{ title }}</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1 {font-family: "Raleway", Arial, sans-serif}
+h1 {letter-spacing: 6px}
+.w3-row-padding img {margin-bottom: 12px}
+</style>
+</head>
+<body>
+
+<a href="/" class="w3-button w3-large w3-left" style="position: fixed; top: 16px; left: 16px; z-index: 10;">
+  <i class="fa fa-home"></i>
+</a>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-content" style="max-width:1500px">
+
+<!-- Header -->
+<header class="w3-panel w3-center w3-opacity" style="padding:128px 16px">
+  <h1 class="w3-xlarge">COOL</h1>
+  <h1>CARS</h1>
+  
+  <div class="w3-padding-32">
+    <div class="w3-bar w3-border">
+      {% for i in range(CarList|length) %}
+        <a href="/set/{{ i }}" class="w3-bar-item w3-button {% if i % 2 == 1 %}w3-light-grey{% endif %}">
+          {{ CarList[i] }}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</header>
+
+<!-- Photo Grid -->
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  {% set half = (imgList|length) // 2 %}
+  <div class="w3-half">
+    {% for img in imgList[:half] %}
+    <img src="{{ url_for('static',filename=img) }}" style="width:100%">
+    {% endfor %}
+  </div>
+
+  <div class="w3-half">
+    {% for img in imgList[half:] %}
+    <img src="{{ url_for('static',filename=img) }}" style="width:100%">
+    {% endfor %}
+  </div>
+</div>
+  
+<!-- End Page Content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large"> 
+  <p>Credits to</p>
+  {% for credit in credits %}
+  <a href="{{ credit }}" target="_blank">
+    <i class="fa fa-instagram w3-hover-opacity"  ></i>
+  </a>  
+  {% endfor %}
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+
+    <!-- W3.CSS & Fonts -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+</head>
+<body class="w3-light-grey">
+
+    <header class="w3-panel w3-center w3-opacity" style="padding:128px 16px">
+        <h1 class="w3-xlarge">COOL</h1>
+        <h1>CARS</h1>
+    </header>
+
+    <div class="container">
+        {% for i in range(CarList|length) %}
+            <div class="square w3-hover-opacity" onclick="window.location.href='/set/{{ i }}'">
+                <img src="{{ url_for('static',filename=introCarImgs[i]) }}" style="width:100%">
+                <div class="overlay"></div>
+                <p>{{ CarList[i] }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+</body>
+<script async src="//www.instagram.com/embed.js"></script>
+</html>
