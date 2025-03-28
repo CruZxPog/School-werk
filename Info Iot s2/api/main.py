@@ -1,43 +1,83 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from typing import Union
-
+# BaseModel is used to define a structured data model for sensors, ensuring validation and serialization. 
+# This approach is preferred over using plain dictionaries or manual validation because it provides built-in type checking
+# https://docs.pydantic.dev/latest/api/base_model/
 
 app = FastAPI()
 
 id_counter = 1
 
-tasks = []
+sensors = []
 
-class Task(BaseModel):
+class Sensor(BaseModel):
     id: int
-    task: str
-    status: Union[bool, None] = False
+    name: str
+    location: str
+    status: bool = False
 
-@app.get("/tasks")
-def read_todo():
-    return tasks
+# get requests
 
-@app.post("/tasks/{task}")
-def create_new_task(task_new: str, status: Union[bool, None]=False):
+@app.get("/sensors")
+def list_sensors():
+    return sensors
+
+@app.get("/sensors/{sensor_id}")
+def list_sensor(sensor_id: int):
+    for sensor in sensors:
+        if sensor.id == sensor_id:
+            return sensor
+    return {"message": "sensor not found"}
+
+@app.get("/sensors/status/{status}")
+def list_sensor_status(status: bool):
+    for sensor in sensors:
+        if sensor.status == status:
+            return sensor
+    return {"message": f"no sensor with status: {str(status)} found"}
+
+# post requests
+
+@app.post("/sensors/{sensor}")
+def create_new_sensors(name: str, location: str, status: bool=False ):
     global id_counter 
-    new_task = Task(id=id_counter, task=task_new, status=status)
+    new_sensor = Sensor(id=id_counter, name=name, location= location, status=status)
     id_counter += 1
-    tasks.append(new_task)
-    return new_task
+    sensors.append(new_sensor)
+    return new_sensor
 
-@app.put("/completeTask/{task_id}")
-def update_task(task_id: int):
-    for task in tasks:
-        if task.id == task_id:
-            task.status = True
-            return task
-    return {"message": "Task not found"}
+# put requests
 
-@app.delete("/deleteTask/{task_id}")
-def delete_task(task_id: int):
-    for task in tasks:
-        if task.id == task_id:
-            tasks.remove(task)
-            return {"message": "Task deleted"}
-    return {"message": "Task not found"}
+@app.put("/sensors/activate/{sensor_id}")
+def activate_sensor(sensor_id: int):
+    for sensor in sensors:
+        if sensor.id == sensor_id:
+            sensor.status = True
+            return sensor
+    return {"message": "sensor not found"}
+
+@app.put("/sensors/deactivate/{sensor_id}")
+def deactivate_sensor(sensor_id: int):
+    for sensor in sensors:
+        if sensor.id == sensor_id:
+            sensor.status = False
+            return sensor
+    return {"message": "sensor not found"}
+
+@app.put("/sensors/update/{sensor_id}")
+def update_sensor(sensor_id: int, name: str, location: str):
+    for sensor in sensors:
+        if sensor.id == sensor_id:
+            sensor.name = name
+            sensor.location = location
+            return sensor
+    return {"message": "sensor not found"}
+# delete requests
+
+@app.delete("/sensors/{sensor_id}")
+def delete_sensor(sensor_id: int):
+    for sensor in sensors:
+        if sensor.id == sensor_id:
+            sensors.remove(sensor)
+            return {"message": "sensor deleted"}
+    return {"message": "sensor not found"}
