@@ -15,12 +15,17 @@
 
 from flask import Flask
 from flask import render_template
-from requests import get, post, put, delete
+import requests
 # https://pypi.org/project/requests/
+
 app = Flask(__name__)
 
 DATABASE_API_URL = "https://my-json-server.typicode.com/CruZxPog/json/guns"
 
-@app.route("/")
-def start_page():
-    render_template("index.html")
+response = requests.get(DATABASE_API_URL)
+guns = response.json()
+print(guns)
+
+# @app.route("/")
+# def start_page():
+#     render_template("index.html",guns=gun_list)
