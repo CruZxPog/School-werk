@@ -21,7 +21,7 @@
 <body>
     <ul>
         {% for gun in guns %}
-        <li>{{ gun }}</li>
+        <li><a href="{{ url_for('category_page', category=gun) }}">{{ gun }}</a></li>
         {% endfor %}
     </ul>
 </body>

@@ -1,0 +1,36 @@
+<!--             █████████                  █████                    -->
+<!--             ███░░░░░███                ░░███                    -->
+<!--            ░███    ░███  ████████    ███████  ████████   ██████ -->
+<!--            ░███████████ ░░███░░███  ███░░███ ░░███░░███ ███░░███-->
+<!--            ░███░░░░░███  ░███ ░███ ░███ ░███  ░███ ░░░ ░███████ -->
+<!--            ░███    ░███  ░███ ░███ ░███ ░███  ░███     ░███░░░  -->
+<!--            █████   █████ ████ █████░░████████ █████    ░░██████ -->
+<!--            ░░░░░   ░░░░░ ░░░░ ░░░░░  ░░░░░░░░ ░░░░░      ░░░░░░ -->
+
+<!-- Vergeet de bronnen niet toe te voegen!-->
+<!-- Bronnen:-->
+<!-- chatgpt.com (03/04)-->
+<!-- copilot.github.com (03/04)-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Guns in {{ category }} Category</h1>
+    <div>
+        {% for gun in guns %}
+        <div>
+            <a href="{{ url_for('gun_page', category=category, gun_id=gun.id) }}">
+                <h3>{{ gun.name }}</h3>
+                <img src="{{ gun.img_url }}" alt="{{ gun.name }}" width="200">
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!--             █████████                  █████                    -->
+<!--             ███░░░░░███                ░░███                    -->
+<!--            ░███    ░███  ████████    ███████  ████████   ██████ -->
+<!--            ░███████████ ░░███░░███  ███░░███ ░░███░░███ ███░░███-->
+<!--            ░███░░░░░███  ░███ ░███ ░███ ░███  ░███ ░░░ ░███████ -->
+<!--            ░███    ░███  ░███ ░███ ░███ ░███  ░███     ░███░░░  -->
+<!--            █████   █████ ████ █████░░████████ █████    ░░██████ -->
+<!--            ░░░░░   ░░░░░ ░░░░ ░░░░░  ░░░░░░░░ ░░░░░      ░░░░░░ -->
+
+<!-- Vergeet de bronnen niet toe te voegen!-->
+<!-- Bronnen:-->
+<!-- chatgpt.com (03/04)-->
+<!-- copilot.github.com (03/04)-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ gun.name }}</title>
+</head>
+<body>
+    <h1>{{ gun.name }}</h1>
+    
+    <div>
+        <!-- Gun Image -->
+        <img src="{{ gun.img_url }}" alt="{{ gun.name }}" width="400">
+    </div>
+
+    <div>
+        <h2>Details</h2>
+        <ul>
+            <li><strong>Category:</strong> {{ gun.category }}</li>
+            <li><strong>Weight:</strong> {{ gun.weight }} kg</li>
+            <li><strong>Length:</strong> {{ gun.length }} cm</li>
+            <li><strong>Barrel Length:</strong> {{ gun.barrel_length }} cm</li>
+            <li><strong>Cartridge:</strong> {{ gun.cartridge }}</li>
+            <li><strong>Action:</strong> {{ gun.action }}</li>
+            <li><strong>Muzzle Velocity:</strong> {{ gun.muzzle_velocity }} m/s</li>
+            <li><strong>Effective Range:</strong> {{ gun.effective_range }} meters</li>
+            <li><strong>Magazine Capacity:</strong> {{ gun.magazine_capacity }}</li>
+            <li><strong>Fire Rate:</strong> {{ gun.fire_rate }}</li>
+        </ul>
+    </div>
+
+    <div>
+        <a href="{{ url_for('category_page', category=gun.category) }}">Back to Category</a>
+    </div>
+</body>
+</html>

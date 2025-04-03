@@ -30,7 +30,7 @@ class gun(BaseModel):
     id: int
     name: str
     category: str
-    weight: int
+    weight: float
     length: int
     barrel_length: int
     cartridge: str
@@ -49,8 +49,31 @@ for gun_data in guns:
 
 #print(gun_list)
 
-
 @app.route("/")
 def start_page():
-    gun_types = [gun.category for gun in gun_list]
-    render_template("index.html",guns=gun_types)
+    gun_types = []
+    for gun in gun_list:
+        if gun.category not in gun_types:
+            gun_types.append(gun.category)
+    return render_template("index.html",guns=gun_types)
+
+@app.route("/category/<category>")
+def category_page(category):
+    guns_in_category = [gun for gun in gun_list if gun.category == category]
+    return render_template("category.html", guns=guns_in_category, category=category)
+
+@app.route("/category/<category>/gun/<int:gun_id>")
+def gun_page(category,gun_id):
+    gun = None
+    for g in gun_list:
+        if g.id == gun_id:
+            gun = g
+            break
+    if gun:
+        return render_template("gun.html", gun=gun)
+    else:
+        return "Gun not found", 404
+
+
+if __name__ == '__main__':  
+   app.run()
