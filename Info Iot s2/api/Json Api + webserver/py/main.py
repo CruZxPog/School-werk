@@ -30,14 +30,14 @@ class gun(BaseModel):
     id: int
     name: str
     category: str
-    weight: str
-    length: str
-    barrel_length: str
+    weight: int
+    length: int
+    barrel_length: int
     cartridge: str
     action: str
-    muzzle_velocity: str
-    effective_range: str
-    magazine_capacity: str
+    muzzle_velocity: int
+    effective_range: int
+    magazine_capacity: int
     fire_rate: str
     img_url: str
 
