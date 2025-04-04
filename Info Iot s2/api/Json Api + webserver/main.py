@@ -7,17 +7,19 @@
 #            █████   █████ ████ █████░░████████ █████    ░░██████ 
 #            ░░░░░   ░░░░░ ░░░░ ░░░░░  ░░░░░░░░ ░░░░░      ░░░░░░ 
 
-# Vergeet de bronnen niet toe te voegen!
+
 # Bronnen:
 # chatgpt.com (28/03)
 # copilot.github.com (28/03)
+# https://pypi.org/project/requests/ (28/03)
+#https://www.geeksforgeeks.org/python-unpack-dictionary/ (28/03)
 
 
 from flask import Flask
 from flask import render_template
 import requests
 from pydantic import BaseModel
-# https://pypi.org/project/requests/
+# https://pypi.org/project/requests/ (28/03)
 
 app = Flask(__name__)
 
@@ -43,7 +45,7 @@ class gun(BaseModel):
 
 gun_list = []
 for gun_data in guns:
-    #https://www.geeksforgeeks.org/python-unpack-dictionary/
+    #https://www.geeksforgeeks.org/python-unpack-dictionary/ (28/03)
     # ** is for unpacking the dictionary into keyword arguments
     gun_list.append(gun(**gun_data))
 
@@ -73,5 +75,8 @@ def gun_page(category,gun_id):
     else:
         return "Gun not found", 404
 
+
+#zonder dit werkte de app niet
+#gekregen van chatgpt als mogelijk oplosing (28/03)
 if __name__ == '__main__':  
    app.run()
