@@ -16,13 +16,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
     <title>Gun Info</title>
 </head>
 <body>
-    <ul>
-        {% for gun in guns %}
+    <!-- https://isorepublic.com/photo/bald-eagle/ -->
+    <img src="/static/img/bald-eagle.webp" alt="Eagle" class="eagle eagle-left"> 
+    <img src="/static/img/bald-eagle.webp" alt="Eagle" class="eagle eagle-right">
+
+    <ul class="sidebar">
+        <li><a href="{{ url_for('start_page') }}">Home</a></li>
+        {% for gun in gun_categories %}
         <li><a href="{{ url_for('category_page', category=gun) }}">{{ gun }}</a></li>
         {% endfor %}
     </ul>
+    <div class="container">
+        {% for gun in guns %}
+        <div class="gun-card">
+            <a href="{{ url_for('gun_page', category=gun.category, gun_id=gun.id) }}">
+                <h3>{{ gun.name }}</h3>
+                <img src="{{ gun.img_url }}" alt="{{ gun.name }}" width="200">
+            </a>
+        </div>
+        {% endfor %}
+    </div>
 </body>
 </html>

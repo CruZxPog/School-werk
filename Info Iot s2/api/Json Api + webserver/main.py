@@ -47,20 +47,19 @@ for gun_data in guns:
     # ** is for unpacking the dictionary into keyword arguments
     gun_list.append(gun(**gun_data))
 
-#print(gun_list)
+gun_categories = []
+for gun in gun_list:
+    if gun.category not in gun_categories:
+        gun_categories.append(gun.category)
 
 @app.route("/")
 def start_page():
-    gun_types = []
-    for gun in gun_list:
-        if gun.category not in gun_types:
-            gun_types.append(gun.category)
-    return render_template("index.html",guns=gun_types)
+    return render_template("index.html",gun_categories=gun_categories,guns=gun_list)
 
 @app.route("/category/<category>")
 def category_page(category):
     guns_in_category = [gun for gun in gun_list if gun.category == category]
-    return render_template("category.html", guns=guns_in_category, category=category)
+    return render_template("category.html",gun_categories=gun_categories, guns=guns_in_category, category=category)
 
 @app.route("/category/<category>/gun/<int:gun_id>")
 def gun_page(category,gun_id):
@@ -70,10 +69,9 @@ def gun_page(category,gun_id):
             gun = g
             break
     if gun:
-        return render_template("gun.html", gun=gun)
+        return render_template("gun.html", gun_categories=gun_categories, gun=gun)
     else:
         return "Gun not found", 404
-
 
 if __name__ == '__main__':  
    app.run()

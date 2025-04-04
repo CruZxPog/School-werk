@@ -17,30 +17,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
     <title>{{ gun.name }}</title>
 </head>
 <body>
-    <h1>{{ gun.name }}</h1>
-    
-    <div>
-        <!-- Gun Image -->
-        <img src="{{ gun.img_url }}" alt="{{ gun.name }}" width="400">
-    </div>
+    <!-- https://isorepublic.com/photo/bald-eagle/ -->
+    <img src="/static/img/bald-eagle.webp" alt="Eagle" class="eagle eagle-left">
+    <img src="/static/img/bald-eagle.webp" alt="Eagle" class="eagle eagle-right">
 
-    <div>
-        <h2>Details</h2>
-        <ul>
-            <li><strong>Category:</strong> {{ gun.category }}</li>
-            <li><strong>Weight:</strong> {{ gun.weight }} kg</li>
-            <li><strong>Length:</strong> {{ gun.length }} cm</li>
-            <li><strong>Barrel Length:</strong> {{ gun.barrel_length }} cm</li>
-            <li><strong>Cartridge:</strong> {{ gun.cartridge }}</li>
-            <li><strong>Action:</strong> {{ gun.action }}</li>
-            <li><strong>Muzzle Velocity:</strong> {{ gun.muzzle_velocity }} m/s</li>
-            <li><strong>Effective Range:</strong> {{ gun.effective_range }} meters</li>
-            <li><strong>Magazine Capacity:</strong> {{ gun.magazine_capacity }}</li>
-            <li><strong>Fire Rate:</strong> {{ gun.fire_rate }}</li>
-        </ul>
+    <ul class="sidebar">
+        <li><a href="{{ url_for('start_page') }}">Home</a></li>
+        {% for gun in gun_categories %}
+        <li><a href="{{ url_for('category_page', category=gun) }}">{{ gun }}</a></li>
+        {% endfor %}
+    </ul>
+    
+    <div class="container">
+        <div class="gun-card">
+            <h1>{{ gun.name }}</h1>
+            <img src="{{ gun.img_url }}" alt="{{ gun.name }}" width="400">
+            <h2>Details</h2>
+            <ul>
+                <li><strong>Category:</strong> {{ gun.category }}</li>
+                <li><strong>Weight:</strong> {{ gun.weight }} kg</li>
+                <li><strong>Length:</strong> {{ gun.length }} cm</li>
+                <li><strong>Barrel Length:</strong> {{ gun.barrel_length }} cm</li>
+                <li><strong>Cartridge:</strong> {{ gun.cartridge }}</li>
+                <li><strong>Action:</strong> {{ gun.action }}</li>
+                <li><strong>Muzzle Velocity:</strong> {{ gun.muzzle_velocity }} m/s</li>
+                <li><strong>Effective Range:</strong> {{ gun.effective_range }} meters</li>
+                <li><strong>Magazine Capacity:</strong> {{ gun.magazine_capacity }}</li>
+                <li><strong>Fire Rate:</strong> {{ gun.fire_rate }}</li>
+            </ul>
+        </div>
     </div>
 
     <div>
