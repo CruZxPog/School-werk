@@ -1,0 +1,45 @@
+/* Course background classes */
+.score-uitstekend {
+	background-color: #16a34a22;
+	border: 2px solid #16a34a;
+}
+.score-goed {
+	background-color: #22c55e22;
+	border: 2px solid #22c55e;
+}
+.score-bijna-goed {
+	background-color: #facc1522;
+	border: 2px solid #facc15;
+}
+.score-niet-goed {
+	background-color: #f9731622;
+	border: 2px solid #f97316;
+}
+.score-niet-ingediend {
+	background-color: #ef444422;
+	border: 2px solid #ef4444;
+}
+.score- {
+	background-color: #6b728022;
+	border: 2px solid #3b3e46;
+}
+
+/* Assignment background classes */
+.score-uitstekend .shadow-md {
+	background-color: #16a34a33;
+}
+.score-goed .shadow-md {
+	background-color: #22c55e33;
+}
+.score-bijna-goed .shadow-md {
+	background-color: #facc1533;
+}
+.score-niet-goed .shadow-md {
+	background-color: #f9731633;
+}
+.score-niet-ingediend .shadow-md {
+	background-color: #ef444433;
+}
+.score- .shadow-md {
+	background-color: #6b728033;
+}
