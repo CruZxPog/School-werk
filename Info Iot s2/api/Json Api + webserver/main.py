@@ -22,18 +22,19 @@ import requests
 
 app = Flask(__name__)
 
-DATABASE_API_URL = "https://my-json-server.typicode.com/CruZxPog/json/guns"
+GUNS_DATABASE_API_URL = "https://my-json-server.typicode.com/CruZxPog/json/guns"
+CATEGORIES_DATABASE_API_URL = "https://my-json-server.typicode.com/cruZxPog/json/categories"
 
-response = requests.get(DATABASE_API_URL)
-data = response.json()
+guns_response = requests.get(GUNS_DATABASE_API_URL)
+categories_response = requests.get(CATEGORIES_DATABASE_API_URL)
 
-guns = data["guns"]
-categories = data["categories"]
+guns = guns_response.json()
+categories = categories_response.json()
 
-category_map = {str(cat["id"]): cat["naam"] for cat in categories}
+category_map = {cat["id"]: cat["naam"] for cat in categories}
 
 for gun in guns:
-    gun["category_name"] = category_map.get(str(gun["category_id"]), "Onbekend")
+    gun["category_name"] = category_map.get(gun["category_id"], "Onbekend")
 
 gun_categories = list(category_map.values())
 
@@ -47,7 +48,7 @@ def category_page(category):
     return render_template("category.html", gun_categories=gun_categories, guns=guns_in_category, category=category)
 
 @app.route("/category/<category>/gun/<int:gun_id>")
-def gun_page(gun_id):
+def gun_page(category, gun_id):
     gun = next((g for g in guns if g["id"] == gun_id), None)
     if gun:
         return render_template("gun.html", gun_categories=gun_categories, gun=gun)
