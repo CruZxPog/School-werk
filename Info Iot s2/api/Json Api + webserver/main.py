@@ -18,7 +18,6 @@
 from flask import Flask
 from flask import render_template
 import requests
-from pydantic import BaseModel
 # https://pypi.org/project/requests/ (28/03)
 
 app = Flask(__name__)
@@ -26,50 +25,30 @@ app = Flask(__name__)
 DATABASE_API_URL = "https://my-json-server.typicode.com/CruZxPog/json/guns"
 
 response = requests.get(DATABASE_API_URL)
-guns = response.json()
+data = response.json()
 
-class gun(BaseModel):
-    id: int
-    name: str
-    category: str
-    weight: float
-    length: int
-    barrel_length: int
-    cartridge: str
-    action: str
-    muzzle_velocity: int
-    effective_range: int
-    magazine_capacity: int
-    fire_rate: str
-    img_url: str
+guns = data["guns"]
+categories = data["categories"]
 
-gun_list = []
-for gun_data in guns:
-    #https://www.geeksforgeeks.org/python-unpack-dictionary/ (28/03)
-    # ** is for unpacking the dictionary into keyword arguments
-    gun_list.append(gun(**gun_data))
+category_map = {str(cat["id"]): cat["naam"] for cat in categories}
 
-gun_categories = []
-for gun in gun_list:
-    if gun.category not in gun_categories:
-        gun_categories.append(gun.category)
+for gun in guns:
+    gun["category_name"] = category_map.get(str(gun["category_id"]), "Onbekend")
+
+gun_categories = list(category_map.values())
 
 @app.route("/")
 def start_page():
-    return render_template("index.html",gun_categories=gun_categories,guns=gun_list)
+    return render_template("index.html", gun_categories=gun_categories, guns=guns)
 
 @app.route("/category/<category>")
 def category_page(category):
-    guns_in_category = [gun for gun in gun_list if gun.category == category]
-    return render_template("category.html",gun_categories=gun_categories, guns=guns_in_category, category=category)
+    guns_in_category = [gun for gun in guns if gun["category_name"] == category]
+    return render_template("category.html", gun_categories=gun_categories, guns=guns_in_category, category=category)
 
 @app.route("/category/<category>/gun/<int:gun_id>")
-def gun_page(category,gun_id):
-    gun = None
-    for g in gun_list:
-        if g.id == gun_id:
-            gun = g
-            break
+def gun_page(gun_id):
+    gun = next((g for g in guns if g["id"] == gun_id), None)
     if gun:
         return render_template("gun.html", gun_categories=gun_categories, gun=gun)
     else:
