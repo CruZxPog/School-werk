@@ -40,8 +40,6 @@ headers = {
 
 app = FastAPI()
 
-
-
 class Sensor(BaseModel):
     name: str
     location: str
@@ -49,10 +47,10 @@ class Sensor(BaseModel):
     metadata: str = None
     id: str
 
-sensors = []
+
 
 def get_sensors():
-    sensors.clear()
+    sensors = []
     url = f"https://api.notion.com/v1/databases/{DATABASE_ID}/query"
     response = requests.post(url, headers=headers)
     if response.status_code == 200:
@@ -60,31 +58,52 @@ def get_sensors():
         data = response.json()
         print("Taken in de database:")
         for result in data["results"]:
-            name = result["properties"]["Name"]["title"][0]["text"]["content"]
-            location = result["properties"]["Location"]["rich_text"][0]["text"]["content"]
-            status = result["properties"]["Status"]["select"]["name"]
-            metadata = result["properties"]["Metadata"]["rich_text"][0]["text"]["content"]
+            name = ""
+            location = ""
+            status = ""
+            metadata = ""
             id = result["id"]
+
+            if result["properties"]["Name"]["title"]:
+                name = result["properties"]["Name"]["title"][0]["text"]["content"]
+            if result["properties"]["Location"]["rich_text"]:
+                location = result["properties"]["Location"]["rich_text"][0]["text"]["content"]
+            if result["properties"]["Status"]["select"]:
+                status = result["properties"]["Status"]["select"]["name"]
+            if result["properties"]["Metadata"]["rich_text"]:
+                metadata = result["properties"]["Metadata"]["rich_text"][0]["text"]["content"]
+
             sensor = Sensor(name=name, location=location, status=status, metadata=metadata, id=id)
             sensors.append(sensor)
+        return sensors
     else:
-        sensors.append(f"Fout: {response.status_code} - {response.text}")
+        return {"message": f"Fout: {response.status_code} - {response.text}"}
 
 # get requests
 @app.get("/sensors")
 def list_sensors():
-    get_sensors()
-    return sensors
+    return get_sensors()
 
 def get_sensors_by_id(sensor_id: str):
     url = f"https://api.notion.com/v1/pages/{sensor_id}"
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         data = response.json()
-        name = data["properties"]["Name"]["title"][0]["text"]["content"]
-        location = data["properties"]["Location"]["rich_text"][0]["text"]["content"]
-        status = data["properties"]["Status"]["select"]["name"]
-        metadata = data["properties"]["Metadata"]["rich_text"][0]["text"]["content"]
+
+        name = ""
+        location = ""
+        status = ""
+        metadata = ""
+
+        if data["properties"]["Name"]["title"]:
+            name = data["properties"]["Name"]["title"][0]["text"]["content"]
+        if data["properties"]["Location"]["rich_text"]:
+            location = data["properties"]["Location"]["rich_text"][0]["text"]["content"]
+        if data["properties"]["Status"]["select"]:
+            status = data["properties"]["Status"]["select"]["name"]
+        if data["properties"]["Metadata"]["rich_text"]:
+            metadata = data["properties"]["Metadata"]["rich_text"][0]["text"]["content"]
+
         sensor = Sensor(name=name, location=location, status=status, metadata=metadata, id=sensor_id)
         return sensor
     else:
@@ -132,10 +151,7 @@ def create_new_sensors(name: str, location: str, status: str = "Inactive", metad
 def update_sensor(sensor_id: str, new_name: str = None, new_location: str = None, new_status: str = "Inactive", new_metadata: str = None):
     url = f"https://api.notion.com/v1/pages/{sensor_id}"
     old_sensor_data = get_sensors_by_id(sensor_id)
-    for sensor in sensors:
-        if sensor.id == sensor_id:
-            old_sensor_data = sensor
-            break
+    
     properties = {}
 
     if new_name:

@@ -1,6 +1,21 @@
+/*             █████████                  █████                    
+             ███░░░░░███                ░░███                    
+            ░███    ░███  ████████    ███████  ████████   ██████ 
+            ░███████████ ░░███░░███  ███░░███ ░░███░░███ ███░░███
+            ░███░░░░░███  ░███ ░███ ░███ ░███  ░███ ░░░ ░███████ 
+            ░███    ░███  ░███ ░███ ░███ ░███  ░███     ░███░░░  
+            █████   █████ ████ █████░░████████ █████    ░░██████ 
+            ░░░░░   ░░░░░ ░░░░ ░░░░░  ░░░░░░░░ ░░░░░      ░░░░░░ 
+
+
+Bronnen:
+chatgpt.com (04/04)
+copilot.github.com (04/04) */
+
+
 /* Apply background image */
 body {
-    background-image: url('/static/img/background.jpg'); /* https://tapeciarnia.pl/tapety/normalne/49984_flaga_usa.jpg */
+    background-image: url('/static/img/background.jpg'); /* https://tapeciarnia.pl/tapety/normalne/49984_flaga_usa.jpg (03/04)*/
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
