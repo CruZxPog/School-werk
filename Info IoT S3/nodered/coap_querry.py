@@ -36,5 +36,3 @@ try:
         time.sleep(5)
 except KeyboardInterrupt:
     print("\nStopped.")
-
-    

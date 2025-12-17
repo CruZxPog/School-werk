@@ -1,0 +1,35 @@
+services:
+  db:
+    image: mariadb:10.6
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: meowpass
+      MYSQL_DATABASE: notion_app
+      MYSQL_USER: notion_user
+      MYSQL_PASSWORD: supersecret
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - my_network
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: unless-stopped
+    ports:
+      - "9090:80"
+    environment:
+      - PMA_HOST=db        # tell phpMyAdmin which DB service
+      - PMA_USER=root      # default login user (you can still change it)
+      - PMA_PASSWORD=meowpass
+      - PMA_ARBITRARY=1
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
+
+volumes:
+  db_data:
