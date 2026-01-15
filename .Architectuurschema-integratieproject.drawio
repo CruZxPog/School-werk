@@ -1,9 +1,67 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0" version="28.2.9">
   <diagram name="Page-1" id="kLjYqP410rDGW0Q8k8dj">
-    <mxGraphModel>
+    <mxGraphModel dx="2058" dy="1106" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="2336" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="pFFSBQWWHue0RWSvsy8E-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="pFFSBQWWHue0RWSvsy8E-1" target="pFFSBQWWHue0RWSvsy8E-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pFFSBQWWHue0RWSvsy8E-12" value="I2C" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="pFFSBQWWHue0RWSvsy8E-3">
+          <mxGeometry x="-0.16" y="3" relative="1" as="geometry">
+            <mxPoint x="-3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pFFSBQWWHue0RWSvsy8E-1" value="&lt;div&gt;MLX90632 sensor&lt;/div&gt;&lt;div&gt;(temperature)&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="720" y="220" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="pFFSBQWWHue0RWSvsy8E-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="pFFSBQWWHue0RWSvsy8E-2" target="pFFSBQWWHue0RWSvsy8E-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pFFSBQWWHue0RWSvsy8E-13" value="MQTT" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="pFFSBQWWHue0RWSvsy8E-5">
+          <mxGeometry x="-0.35" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pFFSBQWWHue0RWSvsy8E-2" value="Arduino Uno R4 WiFi" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="745" y="350" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pFFSBQWWHue0RWSvsy8E-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="pFFSBQWWHue0RWSvsy8E-4" target="pFFSBQWWHue0RWSvsy8E-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pFFSBQWWHue0RWSvsy8E-14" value="JSON" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="pFFSBQWWHue0RWSvsy8E-7">
+          <mxGeometry x="-0.2" y="3" relative="1" as="geometry">
+            <mxPoint x="-3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pFFSBQWWHue0RWSvsy8E-4" value="Mosquitto&amp;nbsp;&lt;div&gt;(Raspberry PI)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="745" y="450" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pFFSBQWWHue0RWSvsy8E-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="pFFSBQWWHue0RWSvsy8E-6" target="pFFSBQWWHue0RWSvsy8E-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pFFSBQWWHue0RWSvsy8E-15" value="SQL" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="pFFSBQWWHue0RWSvsy8E-9">
+          <mxGeometry x="-0.24" y="-4" relative="1" as="geometry">
+            <mxPoint x="4" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pFFSBQWWHue0RWSvsy8E-6" value="Node-RED" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="745" y="560" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pFFSBQWWHue0RWSvsy8E-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="pFFSBQWWHue0RWSvsy8E-8" target="pFFSBQWWHue0RWSvsy8E-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pFFSBQWWHue0RWSvsy8E-16" value="HTTP GET / POST" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="pFFSBQWWHue0RWSvsy8E-11">
+          <mxGeometry x="-0.0333" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pFFSBQWWHue0RWSvsy8E-8" value="MariaDB" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="745" y="670" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pFFSBQWWHue0RWSvsy8E-10" value="Web interface&lt;br&gt;&lt;div&gt;(gebruiker)&lt;/div&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="745" y="790" width="120" height="60" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
